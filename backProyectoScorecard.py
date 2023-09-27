@@ -10,8 +10,12 @@ import sklearn
 import seaborn as sb
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
+from flask_cors import CORS  # Importa CORS
+
 
 app = Flask(__name__)
+CORS(app) 
+CORS(app, resources={r"/procesar": {"origins": "http://localhost:4200"}})
 
 #Definición de variables
 min_score = 300
@@ -87,8 +91,8 @@ def princ_function():
         # Extraer los valores y agregarlos a una lista
         #array_data_request = [data["person_age"],data["person_income"],data["person_emp_length"],data["loan_amnt"],data["loan_int_rate"],data["loan_percent_income"],data["cb_person_cred_hist_length"],data["person_home_ownership_num"],data["loan_intent_num"],data["loan_grade_num"],data["cb_person_default_on_file_num"]]
         
-        
-        return procesar_datos([23, 15000, 6.0, 4000, 12.14, 0.267, 4, 2, 3, 3, 0])
+        #[23, 15000, 6.0, 4000, 12.14, 0.267, 4, 2, 3, 3, 0] => 551 - 0
+        return procesar_datos(data) 
     except Exception as e:
         return {
             'error': str(e) 
